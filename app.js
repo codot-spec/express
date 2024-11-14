@@ -1,19 +1,44 @@
-const express=require('express');
-const bodyParser=require('body-parser');
-const app=express();
-app.use(bodyParser.urlencoded({extended: false}));
+// const express=require('express');
+// const bodyParser=require('body-parser');
+// const app=express();
 
-app.use('/add-product',(req,res,next)=>{
-   res.send('<form action="/product" method="POST"><input type="text" name="title"><input type="number" name="size"><button type="submit">Add Product</button</form>')
+// const adminRoutes=require('./routes/admin.js');
+// const shopRoutes=require('./routes/shop.js');
 
-})
+// app.use(bodyParser.urlencoded({extended: false}));
+// app.use('/admin',adminRoutes);
+// app.use('/shop',shopRoutes);
 
-app.use('/product',(req,res,next)=>{
-    console.log(req.body);
-    res.redirect('/');
-})
+// app.use((req,res,next)=>{
+//    res.status(404).send('<h1>Page not found</h1>');
+// })
 
-app.use('/',(req,res,next)=>{
-   res.send('<h1>Hello</h1>');
-})
-app.listen(3000);
+// app.listen(3000);
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+
+// Import the routes
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
+
+// Middleware to parse form data (URL-encoded data)
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Use /admin for admin-related routes
+app.use('/admin', adminRoutes);
+
+// Use /shop for shop-related routes
+app.use('/shop', shopRoutes);
+
+// Handle 404 errors (Page Not Found)
+app.use((req, res, next) => {
+    res.status(404).send('<h1>Page not found</h1>');
+});
+
+// Start the server on port 3000
+app.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000');
+});
+
