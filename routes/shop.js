@@ -10,18 +10,18 @@
 //  module.exports=router;
 
 
+const path=require('path');
+
 const express = require('express');
+
+const rootDir=require('../helper/path')
 const router = express.Router();
 
 // Route to display the shop page
 router.get('/', (req, res, next) => {
-    res.send('<h1>Welcome to the Shop!</h1>');
+    res.sendFile(path.join(rootDir,'views','shop.html'));
 });
 
-// Route for viewing all products (optional example route)
-router.get('/shop', (req, res, next) => {
-    res.send('<h1>All Products</h1>');
-});
 
 
 module.exports = router;
