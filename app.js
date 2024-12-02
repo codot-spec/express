@@ -25,6 +25,7 @@ const app = express();
 // Import the routes
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
+const contactRoutes = require('./routes/contactus');
 
 // Middleware to parse form data (URL-encoded data)
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -35,6 +36,8 @@ app.use('/admin', adminRoutes);
 
 // Use /shop for shop-related routes
 app.use(shopRoutes);
+
+app.use(contactRoutes);
 
 // Handle 404 errors (Page Not Found)
 app.use((req, res, next) => {
